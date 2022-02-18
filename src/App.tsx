@@ -9,11 +9,11 @@ export default function App() {
     );
     const [currentGuess, setCurrentGuess] = useState('');
 
-    function delay(ms: number) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        });
-    }
+    // function delay(ms: number) {
+    //     return new Promise((resolve) => {
+    //         setTimeout(resolve, ms);
+    //     });
+    // }
 
     useEffect(
         () => setCurrentWord(questions[currentStep].answer),
@@ -21,33 +21,43 @@ export default function App() {
     );
     useEffect(() => setCurrentGuess(''), [currentStep]);
 
+    useEffect(() => {
+        checkGuess();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentGuess]);
+
     const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
+
+        setCurrentGuess(() =>
+            (e.target as HTMLInputElement).value.toLowerCase().trim()
+        );
+    };
+
+    const checkGuess = () => {
         let conditionCheck = currentStep < questions.length - 1;
         if (currentWord === currentGuess) {
             if (conditionCheck) {
                 setCurrentStep((x) => ++x);
                 setCurrentGuess('');
-                makeGreen();
+                // makeGreen();
             } else {
                 setCurrentStep(0);
             }
         }
-        setCurrentGuess(
-            (e.target as HTMLInputElement).value.toLowerCase().trim()
-        );
     };
+
     const handleSpace = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'Space') {
             setCurrentGuess('');
         }
     };
 
-    async function makeGreen() {
-        setCurrentGuess((x) => 'bwahhahahahahah');
-        await delay(3000);
-        setCurrentGuess((x) => ' ');
-    }
+    // async function makeGreen() {
+    //     setCurrentGuess((x) => 'bwahhahahahahah');
+    //     await delay(3000);
+    //     setCurrentGuess((x) => ' ');
+    // }
 
     return (
         <div className="App">
