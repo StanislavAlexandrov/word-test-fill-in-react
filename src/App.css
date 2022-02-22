@@ -4,3 +4,7 @@
 .highlight_right {
     color: green;
 }
+
+.guessInput {
+    font-size: 2rem;
+}
