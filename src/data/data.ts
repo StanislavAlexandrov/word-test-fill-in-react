@@ -4,11 +4,26 @@ interface IData {
 }
 
 const DATA: IData[] = [
-    { question: 'повлечь за собой', answer: 'entail' },
-    { question: 'сходиться', answer: 'converge' },
-    { question: 'склонять чашу весов - ... the scales', answer: 'tip' },
-    { question: 'мусорить', answer: 'litter' },
-    { question: 'бесцельный', answer: 'aimless' },
+    { question: 'обвинить (a-)', answer: 'accuse' },
+    { question: 'смежный (a-)', answer: 'adjacent' },
+    { question: 'подростковый (a-)', answer: 'adolescent' },
+    { question: 'пришествие, приход (a-)', answer: 'advent' },
+    { question: 'выступать за (a-)', answer: 'advocate' },
+    { question: 'богатство (a-)', answer: 'affluence' },
+    { question: 'усугублять (a-)', answer: 'aggravate' },
+    { question: 'якобы (a-)', answer: 'allegedly' },
+    { question: 'верность (a-)', answer: 'allegiance' },
+    { question: 'распределять, выделять (a-)', answer: 'allocate' },
+    { question: 'двусмысленный (a-)', answer: 'ambiguous' },
+    { question: 'изменять что-то (a-)', answer: 'amend' },
+    { question: 'вершина (a-)', answer: 'apex' },
+    { question: 'задержать, установить (a-)', answer: 'apprehend' },
+    { question: 'произвольный (a-)', answer: 'arbitrary' },
+    { question: 'высокомерно (a-)', answer: 'arrogantly' },
+    { question: 'устанавливать (a-)', answer: 'ascertain' },
+    { question: 'нападать (a-)', answer: 'assail' },
+    { question: 'оценивать (as-)', answer: 'assess' },
+    { question: 'увеличить (a-)', answer: 'augment' },
 ];
 
 export default DATA;

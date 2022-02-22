@@ -7,7 +7,7 @@ let questions = shuffleArray(DATA);
 //lambda functions are not revaluated in useState; lazy initial state
 export default function App() {
     const [currentStep, setCurrentStep] = useState(0);
-    const [numberQuestions, setNumberQuestions] = useState(5);
+    const [numberQuestions, setNumberQuestions] = useState(DATA.length);
     let currentQuestion = questions.slice(0, numberQuestions)[currentStep];
     const [currentWord, setCurrentWord] = useState(
         () => currentQuestion.answer
