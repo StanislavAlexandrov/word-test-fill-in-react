@@ -3,6 +3,7 @@ import DATA from './data/data';
 import React, { useEffect, useState } from 'react';
 import shuffleArray from './helpers/shuffleArray';
 import Picker from './components/picker';
+
 let questions = shuffleArray(DATA);
 //lambda functions are not revaluated in useState; lazy initial state
 export default function App() {
@@ -15,19 +16,30 @@ export default function App() {
 
     const [currentGuess, setCurrentGuess] = useState('');
 
+    const [correctGuess, setCorrectGuess] = useState(false);
+
     useEffect(
         () => setCurrentWord(currentQuestion.answer),
         [currentStep, numberQuestions, currentQuestion]
     );
     useEffect(() => setCurrentGuess(''), [currentStep]);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setCorrectGuess(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, [currentStep]);
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         let conditionCheck = currentStep < questions.length - 1;
         if (currentWord === currentGuess) {
             if (conditionCheck) {
+                setCorrectGuess(true);
                 setCurrentStep((x) => ++x);
                 setCurrentGuess('');
             } else {
+                setCorrectGuess(false);
                 setCurrentStep(0);
             }
         }
@@ -40,12 +52,12 @@ export default function App() {
             if (conditionCheck) {
                 setCurrentStep((x) => ++x);
                 setCurrentGuess('');
+                setCorrectGuess(true);
             } else {
                 setCurrentStep(0);
             }
         }
     };
-    //what if: set a variable to true after the correct guess, then to false in...where? display the guess
 
     useEffect(() => {
         checkGuess();
@@ -56,16 +68,14 @@ export default function App() {
             setCurrentGuess('');
         }
     };
-    //question about null className in return
+
     return (
         <div className="App">
             {/* <Picker
                 numberQuestions={numberQuestions}
                 setNumberQuestions={setNumberQuestions}
             /> */}
-            <h2 className={currentGuess === '' ? 'highlight_right' : undefined}>
-                This is green if the guess was correct. No need to use 'space'.
-            </h2>
+
             <h3>
                 current step: {currentStep + 1} of {questions.length}
             </h3>
@@ -77,6 +87,18 @@ export default function App() {
                 onChange={handleInput}
                 onKeyDown={handleSpace}
             />
+            <div className="highlight_right">
+                <h1>{correctGuess ? 'correct' : undefined}</h1>
+                <h2>
+                    {correctGuess
+                        ? questions[currentStep - 1].answer + ': '
+                        : undefined}
+
+                    {correctGuess
+                        ? questions[currentStep - 1].question
+                        : undefined}
+                </h2>
+            </div>
         </div>
     );
 }
